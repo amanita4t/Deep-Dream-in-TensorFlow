@@ -37,4 +37,17 @@ def main():
     layers = [op.name for op in graph.get_operations() if op.type=='Conv2D' and '/import' in op.name]
     feature_nums = [int(graph.get_tensor_by_name(name+ ':0').get_shape()[-1]) for names in layers]
     
-            
+    def render_deepdream():
+        
+    print('Number of layers', len(layers))
+    print('Total number of feature channels:', sum(feature_nums))
+
+    #Pick a layer to inhance the image
+    layer = 'mixed4d_3x3_bottleneck_pre_relu'
+    channel = 139
+
+    img0 = PIL.image.open('') #Image path
+    img0 = np.float32(img0)
+
+    #Apply gradiant ascent to that layer
+    render_deepdream(T(layer)[:,:,:139] img0)
